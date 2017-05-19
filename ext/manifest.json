@@ -1,0 +1,27 @@
+{
+  "name": "Github compare tags",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "xxx",
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "permissions": [
+    "storage",
+    "https://github.com/*"
+  ],
+  "background": { "scripts": ["src/hot-reload.js"] },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "src/inject.js"
+      ]
+    }
+  ]
+}

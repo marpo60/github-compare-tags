@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "eslint .",
+    "release": "webstore upload --source=ext --auto-publish"
+  },
+  "devDependencies": {
+    "chrome-webstore-upload-cli": "^1.1.1",
+    "eslint": "^3.19.0"
+  }
+}

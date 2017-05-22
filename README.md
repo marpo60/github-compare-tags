@@ -1,12 +1,10 @@
 # Github compare tags
 
-## Before
+Before                     |  After
+:-------------------------:|:-------------------------:
+![before](before.png)      |   ![after](after.png)
 
-![before](before.png)
 
-## After
-
-![after](after.png)
 
 ## License
 

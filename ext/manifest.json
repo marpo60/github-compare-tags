@@ -9,7 +9,6 @@
     "128": "icons/icon.png"
   },
   "permissions": [
-    "storage",
     "https://github.com/*"
   ],
   "background": { "scripts": ["src/hot-reload.js"] },

@@ -5,13 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   var privateInput = document.getElementById("private");
 
   chrome.storage.local.get(['token', 'private'], function(items) {
-    tokenInput.value = items.token;
+    if (items.token) {
+      tokenInput.value = items.token;
+    }
     privateInput.checked = items.private;
-  });
-
-  chrome.storage.local.get('token', function(items) {
-    var token = items.token;
-    tokenInput.value = token;
   });
 
   tokenInput.addEventListener('change', (e) => {

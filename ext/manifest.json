@@ -9,9 +9,14 @@
     "128": "icons/icon.png"
   },
   "permissions": [
+    "storage",
     "https://github.com/*"
   ],
   "background": { "scripts": ["src/hot-reload.js"] },
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  },
   "content_scripts": [
     {
       "run_at": "document_start",

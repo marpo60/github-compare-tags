@@ -1,10 +1,14 @@
 {
   "scripts": {
-    "test": "eslint .",
+    "test": "eslint . && jest",
     "release": "webstore upload --source=ext --auto-publish"
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^1.1.1",
-    "eslint": "^3.19.0"
+    "eslint": "^3.19.0",
+    "jest": "^24.8.0",
+    "jest-puppeteer": "^4.1.1",
+    "path": "^0.12.7",
+    "puppeteer": "^1.17.0"
   }
 }

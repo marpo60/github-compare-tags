@@ -6,9 +6,8 @@
   var privateRepos = null;
 
   function createAnchorElement(repo, base, compare, text) {
-    var innerText = `<a href="/${repo}/compare/${base}...${compare}" class="select-menu-item js-navigation-item js-navigation-open navigation-focus" role="menuitem" rel="nofollow">
-            <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
-            <div class="select-menu-item-text js-select-button-text">${text}</div>
+    var innerText = `<a href="/${repo}/compare/${base}...${compare}" class="select-menu-item" aria-checked="true" role="menuitemradio" rel="nofollow">
+            <div class="select-menu-item-text" data-menu-button-text="">${text}</div>
           </a>`;
     var div = document.createElement('div');
     div.innerHTML = innerText;
@@ -21,7 +20,7 @@
     var repo = `${owner}/${repoName}`;
     var [menuBase, menuCompare] = document.querySelectorAll(".commitish-suggester .select-menu-list > div:first-child ");
 
-    var x = document.querySelectorAll(".commitish-suggester .js-select-button");
+    var x = document.querySelectorAll(".commitish-suggester [data-menu-button]");
     var tagBase = x[0].innerText;
     var tagCompare = x[1].innerText;
 
@@ -92,12 +91,26 @@
       return;
     }
 
-    var i = extractInfo();
+    const loaders = document.querySelectorAll('.commitish-suggester include-fragment');
+    const promises = Array.from(loaders).map((loader) =>
+      new Promise((resolve) => {
+        loader.addEventListener('loadend', () => resolve());
+      })
+    );
 
-    getTags().then(function() {
-      tags.forEach(function(tag) {
-        i.menuBase.append(createAnchorElement(i.repo, tag, i.tagCompare, tag));
-        i.menuCompare.append(createAnchorElement(i.repo, i.tagBase, tag, tag));
+    const mouseoverEvent = new Event('mouseover');
+    document.querySelectorAll(".commitish-suggester").forEach((el) => {
+      el.dispatchEvent(mouseoverEvent);
+    });
+
+    Promise.all(promises).then(() => {
+      var i = extractInfo();
+
+      getTags().then(function() {
+        tags.forEach(function(tag) {
+          i.menuBase.append(createAnchorElement(i.repo, tag, i.tagCompare, tag));
+          i.menuCompare.append(createAnchorElement(i.repo, i.tagBase, tag, tag));
+        });
       });
     });
   }

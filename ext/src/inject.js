@@ -94,16 +94,18 @@
     const loaders = document.querySelectorAll('.commitish-suggester include-fragment');
     const promises = Array.from(loaders).map((loader) =>
       new Promise((resolve) => {
-        loader.addEventListener('loadend', () => resolve());
+        loader.addEventListener('load', () => resolve());
       })
     );
 
-    const mouseoverEvent = new Event('mouseover');
-    document.querySelectorAll(".commitish-suggester").forEach((el) => {
-      el.dispatchEvent(mouseoverEvent);
-    });
+    // mouseover handler is not present in the DOM element the first few times this runs
+    var interval = setInterval(() => {
+      const mouseoverEvent = new Event('mouseover');
+      document.querySelectorAll(".commitish-suggester").forEach((el) => el.dispatchEvent(mouseoverEvent));
+    }, 500);
 
     Promise.all(promises).then(() => {
+      clearInterval(interval);
       var i = extractInfo();
 
       getTags().then(function() {

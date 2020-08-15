@@ -1,3 +1,12 @@
+# DEPRECATED
+
+Github implemented this on their own site, which is great!
+
+This extension is not longer needed.
+
+https://github.blog/changelog/2020-01-13-shortcut-to-compare-across-two-releases/
+
+
 # Github compare tags
 
 Chrome extension that adds tags to the compare page of Github
